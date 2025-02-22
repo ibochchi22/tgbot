@@ -5,6 +5,12 @@ from aiogram.types import Message
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 
+# Telegram botni ulash
+TOKEN = "ТВОЙ_ТОКЕН"
+bot = Bot(token=TOKEN)
+dp = Dispatcher()
+router = Router()  # Router yaratamiz
+
 # Flask va ma'lumotlar bazasi sozlamalari
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///shop.db'
@@ -13,19 +19,13 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-# Modelni aniqlaymiz (models.py bilan bir xil)
+# Modelni aniqlaymiz
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     code = db.Column(db.String(5), unique=True, nullable=False)
     name = db.Column(db.String(100), nullable=False)
     price_in = db.Column(db.Float, nullable=False)
     price_out = db.Column(db.Float, nullable=False)
-
-# Telegram botni ulash
-TOKEN = "7111059406:AAHXcuDaZYEjsCjFk6-fNeu0QZkKiXeB1bA"
-bot = Bot(token=TOKEN)
-dp = Dispatcher()
-router = Router()  # Router yaratamiz
 
 # Mahsulotni ma'lumotlar bazasidan qidirish funksiyasi
 def get_product_info(code):
@@ -56,16 +56,3 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-
-
-
-from flask import request
-
-@app.route('/')
-def home():
-    return "Bot is running!"
-
-if __name__ == "__main__":
-    import os
-    port = int(os.environ.get("PORT", 5000))  # Railway выдаст PORT
-    app.run(host="0.0.0.0", port=port)
