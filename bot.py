@@ -56,3 +56,16 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
+
+
+from flask import request
+
+@app.route('/')
+def home():
+    return "Bot is running!"
+
+if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT", 5000))  # Railway выдаст PORT
+    app.run(host="0.0.0.0", port=port)
