@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 
 # Telegram botni ulash
-TOKEN = "ТВОЙ_ТОКЕН"
+TOKEN = "7111059406:AAHXcuDaZYEjsCjFk6-fNeu0QZkKiXeB1bA"
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 router = Router()  # Router yaratamiz
